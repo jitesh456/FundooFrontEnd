@@ -1,0 +1,89 @@
+    
+.form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+.register {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+.create-account {
+    color: rgb(31, 69, 252);
+    font-weight: bold;
+    font-family: ui-monospace;
+    font-size: 15px;
+    margin-left: 3px;
+}
+.create-account-text{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+.sign {
+    font: -webkit-mini-control;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.email{
+
+    border: 1px solid silver;
+    border-radius: 24px;
+    display: flex;
+    cursor: POINTER;
+    justify-content: space-evenly;
+    padding: 4px;
+    margin:8px;
+}
+
+.card{
+    width:20%;
+    padding:3%;
+    border: 1px solid silver;
+}
+
+@media screen and (max-width: 1024px)
+{
+
+	.card{
+		width: 26%;	
+	}
+}
+@media screen and (max-width: 768px)
+{
+
+	.card{
+		width: 35%;	
+	}
+}
+@media screen and (max-width: 540px)
+{
+
+	.card{
+		width: 50%;		
+	}
+}
+@media screen and (max-width: 414px)
+{
+
+	.card{
+		width: 66%;	
+	}
+}
+@media screen and (max-width: 375px)
+{
+
+	.card{
+		width: 73%;	
+	}
+}
+
+@media screen and (max-width: 320px)
+{
+
+	.card{
+		width: 82%;	
+	}
+}

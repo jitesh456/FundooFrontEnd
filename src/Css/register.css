@@ -1,0 +1,30 @@
+.card-register{
+    width:37%;
+    padding:3%;
+    border: 1px solid silver;
+}
+
+.register-text{
+    font-family: sans-serif;
+    font-size: 20px;
+    padding-left:9px;
+}
+
+.helperText{
+    display: flex;
+    margin:0px;
+    padding-left:2% ;
+}
+
+.input-field{
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.name{
+    display: flex;
+    justify-content: space-between;
+    
+}
