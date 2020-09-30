@@ -14,7 +14,7 @@ import {useHistory} from  'react-router-dom'
 const theme = createMuiTheme({
     palette: {        
         secondary: {
-            main: '#1F45FC',
+            main: '#1a73e8',
         },
     },
 });
@@ -49,7 +49,8 @@ export default function Login () {
              <p>Use your fundoo account</p>
          </div>
          <ThemeProvider theme={theme} >
-             <form className={classes.root}  noValidate autoComplete="off">            
+             <form className={classes.root}  noValidate autoComplete="off">   
+             <div className="Login-form">         
                  <div>
                      <TextField                
                      id="filled"
@@ -71,7 +72,9 @@ export default function Login () {
                      variant="outlined"
                      color="secondary"
                      />
-                 </div>                     
+                 </div>      
+                 </div>
+                 <p className="forgot-Password">Forgot Password?</p>               
                  <div style={{display:"flex" ,justifyContent:"space-between",margin:"9px"}}> 
                     <p className="create-account"onClick={()=>{changePage()}}>Create Account</p>                       
                      <Button variant="contained" size="medium" color="primary" 
