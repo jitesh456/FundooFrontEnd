@@ -4,11 +4,6 @@
     justify-content: center;
     margin-top: 10%;
 }
-.register {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
-}
 .create-account {
     color:#1a73e8;
     font-weight: bold;

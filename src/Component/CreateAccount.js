@@ -76,7 +76,7 @@ export default function CreateAccount(){
                             </div>                    
                         </div>
                         <div >
-                            <div style={{display:"flex",height:"43px",paddingLeft:"2%",paddingRight:"2%"}}>                    
+                            <div className="email-field">                    
                                 <OutlinedInput                
                                     id="outlined-adornment-weight"                                                
                                     endAdornment={<InputAdornment position="end">@gmail.com</InputAdornment>}                        

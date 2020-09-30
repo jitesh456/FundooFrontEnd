@@ -51,6 +51,7 @@ export default function Login () {
         console.log(emailId,password)
         var emailPattern = /^[a-zA-Z]{3,}([-|+|.|_]?[a-zA-Z0-9]+)?[@]{1}[A-Za-z0-9]+[.]{1}[a-zA-Z]{2,4}([.]{1}[a-zA-Z]+)?$/;
         var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        
         if(!emailPattern.test(emailId)){
             setEmailError('plz provide valid email');
             setEmailState(true);
