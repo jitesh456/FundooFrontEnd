@@ -49,8 +49,8 @@
 .Login-form{
     display: flex;
     flex-direction: column;
-    height: 120px;
-    justify-content: space-between;
+    height: 145px;
+    justify-content: space-around;
 }
 
 .forgot-Password{

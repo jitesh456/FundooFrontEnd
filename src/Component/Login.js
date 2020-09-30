@@ -36,8 +36,37 @@ export default function Login () {
 
     const history=useHistory();
 
+    const[emailId,setEmailId]=useState('');
+    const[password,setPassword]=useState('');
+    const[emailError,setEmailError]=useState('');
+    const[passwordError,setPasswordError]=useState('');
+    const[emailState,setEmailState]=useState(false);
+    const[passwordState,setPasswordState]=useState(false);
+
     const changePage=()=>{
         history.push('/CreateAccount');
+    }
+
+    const handleSubmit=()=>{
+        console.log(emailId,password)
+        var emailPattern = /^[a-zA-Z]{3,}([-|+|.|_]?[a-zA-Z0-9]+)?[@]{1}[A-Za-z0-9]+[.]{1}[a-zA-Z]{2,4}([.]{1}[a-zA-Z]+)?$/;
+        var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        if(!emailPattern.test(emailId)){
+            setEmailError('plz provide valid email');
+            setEmailState(true);
+        }
+        if(!passwordPattern.test(password)){
+            setPasswordError('plz provide valid password');
+            setPasswordState(true);
+        }
+        if(emailPattern.test(emailId)){
+            setEmailError('');
+            setEmailState(false);
+        }
+        if(passwordPattern.test(password)){
+            setPasswordError('');
+            setPasswordState(false);
+        }
     }
 
     return (
@@ -52,12 +81,15 @@ export default function Login () {
              <form className={classes.root}  noValidate autoComplete="off">   
              <div className="Login-form">         
                  <div>
-                     <TextField                
+                     <TextField 
+                     error={emailState}               
                      id="filled"
                      label="Email"
-                     helperText=""
+                     name="emai"                     
+                     helperText={emailError}
                      size="small"
                      variant="outlined"
+                     onChange={e=>setEmailId(e.target.value)}
                      color="secondary"
                      />
                  </div>
@@ -65,8 +97,10 @@ export default function Login () {
                  <div>
                      <TextField                
                      id="filled"
+                     error={passwordState}
                      label="Password"
-                     helperText=""
+                     helperText={passwordError}
+                     onChange={e=>setPassword(e.target.value)}
                      size="small"
                      type="Password"
                      variant="outlined"
@@ -78,7 +112,8 @@ export default function Login () {
                  <div style={{display:"flex" ,justifyContent:"space-between",margin:"9px"}}> 
                     <p className="create-account"onClick={()=>{changePage()}}>Create Account</p>                       
                      <Button variant="contained" size="medium" color="primary" 
-                     style={{margin:"6px",background:"#1F45FC"}} >
+                     style={{margin:"6px",background:"#1F45FC"}}
+                     onClick={()=>{handleSubmit()}} >
                      Login
                      </Button>
                  </div>
