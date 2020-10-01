@@ -1,9 +1,8 @@
 import React,{useState} from 'react';
-import {InputGroup,FormControl,Card,Button,Form,FormGroup} from 'react-bootstrap';
+import {InputGroup,FormControl,Card,Button,Form} from 'react-bootstrap';
 export default function ResetPassword(){
 
-    const passwordPattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@|.|!|#])(?=.*[a-zA-Z]).{8,}$/;
-    const [validated, setValidated] = useState(false);
+    const passwordPattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@|.|!|#])(?=.*[a-zA-Z]).{8,}$/;    
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');    
     const [passwordErrorStatus, setPasswordErrorStatus] = useState(true);
@@ -12,7 +11,7 @@ export default function ResetPassword(){
     const [confirmPasswordErrorStatus, setConfirmPasswordErrorStatus] = useState(true);
 
     const handleSubmit = (event) => {
-      const form = event.currentTarget;
+      
       if(!passwordPattern.test(password)){
           setPasswordError('Not a valid Password');
           setPasswordErrorStatus(false);  
@@ -45,16 +44,15 @@ export default function ResetPassword(){
             <Card.Body>
             <div style={{height:"120px"}}>
                     <div>
-                        <img height="27px" src={require('../Assets/FundooLogo.PNG')}/>    
+                        <img height="27px" alt="fandooLogo" src={require('../Assets/FundooLogo.PNG')}/>    
                     </div>       
                     <div>     
                     <p style={{fontSize:"24px",margin:"0px"}}>Account Recovery</p>                       
                     <p style={{fontSize:"16px"}}>Use Your Fundoo Account</p>
                     </div>
             </div>
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <InputGroup className="mb-3" controlId="validationCustom01">
-            
+            <Form noValidate  onSubmit={handleSubmit}>
+            <InputGroup className="mb-3" controlId="validationCustom01">            
             <FormControl
             placeholder="Password"
             type="Password"

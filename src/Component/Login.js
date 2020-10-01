@@ -71,7 +71,7 @@ export default function Login () {
         <div className="form">
         <Card className="card">
          <div style={{paddingBottom:"7%"}}>
-             <img height="27px" src={require('../Assets/FundooLogo.PNG')}/>                
+             <img height="27px" alt="fandooLogo" src={require('../Assets/FundooLogo.PNG')}/>                
              <p className="sign">Sign in</p>
              <p>Use your fundoo account</p>
          </div>

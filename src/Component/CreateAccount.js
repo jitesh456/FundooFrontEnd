@@ -71,7 +71,7 @@ export default function CreateAccount(){
             setPasswordError('Invalid Password')
             setPasswordErrorState(true);
         }
-        if(confirmPassword!=password || confirmPassword===""){
+        if(confirmPassword!==password || confirmPassword===""){
             setConfirmPasswordError('Confirm password and password must be same')
             setConfirmPasswordErrorState(true);
         }
@@ -91,7 +91,7 @@ export default function CreateAccount(){
             setPasswordError('')
             setPasswordErrorState(false);
         }
-        if(confirmPassword===password && confirmPassword!=""){
+        if(confirmPassword===password && confirmPassword!==""){
             setConfirmPasswordError('Confirm password and password must be same')
             setConfirmPasswordErrorState(true);
         }
@@ -106,7 +106,7 @@ export default function CreateAccount(){
            <Card className="card-register">
             <div className="create-account-text">
                 <div>
-                    <img height="27px" src={require('../Assets/FundooLogo.PNG')}/>    
+                    <img height="27px" alt="fandooLogo" src={require('../Assets/FundooLogo.PNG')}/>    
                 </div>       
                 <div>     
                  <p className="register-text">Create your Fandoo Account</p>
@@ -166,8 +166,7 @@ export default function CreateAccount(){
                                     <TextField                
                                     id="filled"
                                     error={passwordErrorState}
-                                    label="Password"
-                                    helperText=""
+                                    label="Password"                                    
                                     type="Password"
                                     variant="outlined"
                                     size="small"
@@ -179,7 +178,7 @@ export default function CreateAccount(){
                                 <div >
                                     <TextField                                           
                                     id="filled"
-                                    error={confirmPasswordError}
+                                    error={confirmPasswordErrorState}
                                     label="Confirm "
                                     type="Password"
                                     size="small" 
