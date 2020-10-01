@@ -6,8 +6,6 @@ import '../Css/Login.css';
 import Button from '@material-ui/core/Button';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {useHistory} from  'react-router-dom'
 
 
@@ -32,10 +30,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Login () {
+    
+    var emailPattern = /^[a-zA-Z]{3,}([-|+|.|_]?[a-zA-Z0-9]+)?[@]{1}[A-Za-z0-9]+[.]{1}[a-zA-Z]{2,4}([.]{1}[a-zA-Z]+)?$/;
+    var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
     const classes=useStyles();
-
     const history=useHistory();
-
     const[emailId,setEmailId]=useState('');
     const[password,setPassword]=useState('');
     const[emailError,setEmailError]=useState('');
@@ -48,10 +48,7 @@ export default function Login () {
     }
 
     const handleSubmit=()=>{
-        console.log(emailId,password)
-        var emailPattern = /^[a-zA-Z]{3,}([-|+|.|_]?[a-zA-Z0-9]+)?[@]{1}[A-Za-z0-9]+[.]{1}[a-zA-Z]{2,4}([.]{1}[a-zA-Z]+)?$/;
-        var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-        
+        console.log(emailId,password)                
         if(!emailPattern.test(emailId)){
             setEmailError('plz provide valid email');
             setEmailState(true);

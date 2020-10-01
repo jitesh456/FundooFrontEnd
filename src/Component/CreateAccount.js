@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Input from '@material-ui/core/Input';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import '../Css/Login.css';
 import '../Css/register.css';
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -33,8 +31,73 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateAccount(){
 
+    const namePattern = /[a-zA-Z]{1,}$/;
+    const userNamePattern=/^[a-zA-Z]{3,}([-|+|.|_]?[a-zA-Z0-9]+)?$/;
+    var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@|.|!|#])(?=.*[a-zA-Z]).{8,}$/;
+    
     const classes = useStyles();
     const history=useHistory();
+    const [firstName,setFirstName]=useState('');
+    const [firstNameErrorStatus,setFirstNameErrorStatus]=useState(false);
+    const [firstNameError,setFirstNameError]=useState('');
+    const [lastName,setLastName]=useState('');
+    const [lastNameErrorStatus,setLastNameErrorStatus]=useState(false);
+    const [lastNameError,setLastNameError]=useState('');
+    const [userName,setEmail]=useState('');
+    const [userNameErrorStatus,setUsernameErrorStatus]=useState(false);
+    const [userNameError,setUsernameError]=useState('');
+    const [password,setPassword]=useState('');
+    const [passwordError,setPasswordError]=useState('');
+    const [passwordErrorState,setPasswordErrorState]=useState(false);
+    const [confirmPassword,setConfirmPassword]=useState('');
+    const [confirmPasswordError,setConfirmPasswordError]=useState('');
+    const [confirmPasswordErrorState,setConfirmPasswordErrorState]=useState('');
+
+    const handleSubmit=()=>{
+        console.log(firstName);
+        if(!namePattern.test(firstName)){
+            setFirstNameError('Name must not include number')
+            setFirstNameErrorStatus(true);
+        }
+        if(!namePattern.test(lastName)){
+            setLastNameError('Name must not include number')
+            setLastNameErrorStatus(true);
+        }
+        if(!userNamePattern.test(userName)){
+            setUsernameError('User Name Must Not Start with number')
+            setUsernameErrorStatus(true);
+        }
+        if(!passwordPattern.test(password)){
+            setPasswordError('Invalid Password')
+            setPasswordErrorState(true);
+        }
+        if(confirmPassword!=password || confirmPassword===""){
+            setConfirmPasswordError('Confirm password and password must be same')
+            setConfirmPasswordErrorState(true);
+        }
+        if(namePattern.test(firstName)){
+            setFirstNameError('')
+            setFirstNameErrorStatus(false);
+        }
+        if(namePattern.test(lastName)){
+            setLastNameError('')
+            setLastNameErrorStatus(false);
+        }
+        if(userNamePattern.test(userName)){
+            setUsernameError('')
+            setUsernameErrorStatus(false);
+        }
+        if(passwordPattern.test(password)){
+            setPasswordError('')
+            setPasswordErrorState(false);
+        }
+        if(confirmPassword===password && confirmPassword!=""){
+            setConfirmPasswordError('Confirm password and password must be same')
+            setConfirmPasswordErrorState(true);
+        }
+        
+        
+    }
     const changePage=()=>{
         history.push('/');
     }
@@ -54,39 +117,47 @@ export default function CreateAccount(){
                     <div className="input-field">
                         <div className="name">
                             <div>
-                                <TextField                
+                                <TextField   
+                                error={firstNameErrorStatus}             
                                 id="filled"
                                 label="First Name"
-                                helperText=""
+                                helperText={firstNameError}
                                 size="small"
                                 variant="outlined"
                                 color="secondary"
-                                
+                                onChange={e=>{setFirstName(e.target.value)}}
                                 />
                             </div>
                             <div>
-                                <TextField                
+                                <TextField               
+                                error={lastNameErrorStatus} 
                                 id="filled"
                                 label="Last Name"
-                                helperText=""
+                                helperText={lastNameError}
                                 size="small"
                                 variant="outlined"
                                 color="secondary"
+                                onChange={e=>{setLastName(e.target.value)}}
                                 />
                             </div>                    
                         </div>
                         <div >
                             <div className="email-field">                    
-                                <OutlinedInput                
+                                <OutlinedInput   
+                                    error={userNameErrorStatus}             
                                     id="outlined-adornment-weight"                                                
+                                    helperText={userNameError}
                                     endAdornment={<InputAdornment position="end">@gmail.com</InputAdornment>}                        
-                                    placeholder="Username"
+                                    placeholder="Username"                                    
                                     size="small"
                                     lable="Username"
-                                    style={{width:"100%"}}
+                                    fullWidth="true"
                                     color="secondary"
+                                    onChange={e=>{setEmail(e.target.value)}}
                                     />                                
+                            
                             </div>
+                            <p className="helperTextForError">{userNameError}</p>
                             <p className="helperText">You can use letters,numbers & periods</p>
                         </div>
                         <div>
@@ -94,35 +165,42 @@ export default function CreateAccount(){
                                 <div>
                                     <TextField                
                                     id="filled"
+                                    error={passwordErrorState}
                                     label="Password"
                                     helperText=""
                                     type="Password"
                                     variant="outlined"
                                     size="small"
+                                    helperText={passwordError}
                                     color="secondary"
+                                    onChange={e=>{setPassword(e.target.value)}}
                                     />
                                 </div>
                                 <div >
                                     <TextField                                           
                                     id="filled"
+                                    error={confirmPasswordError}
                                     label="Confirm "
                                     type="Password"
-                                    size="small"                            
+                                    size="small" 
+                                    helperText={confirmPasswordError}                           
                                     variant="outlined"
                                     color="secondary"
+                                    onChange={e=>{setConfirmPassword(e.target.value)}}
                                     />
-                                </div>
-                                
+                                </div>                                
                             </div>
                             <p className="helperText">Use 8 or more characters with a mix of letters, numbers & symbols</p>                    
                         </div>
                     </div>
                     <div style={{display:"flex" ,justifyContent:"space-between",margin:"9px",marginTop:"5%"}}>  
                             <p className="create-account"onClick={()=>{changePage()}}>Sign In</p>                
-                                <Button variant="contained" size="medium" color="primary" 
-                                style={{margin:"6px",background:"#1F45FC"}} >
+                            <Button variant="contained" size="medium" color="primary" 
+                                style={{margin:"6px",background:"#1F45FC"}}
+                                onClick={()=>{handleSubmit()}}
+                                >
                                 Create Account
-                                </Button>
+                            </Button>
                     </div>            
                 </form>
             </ThemeProvider>        
