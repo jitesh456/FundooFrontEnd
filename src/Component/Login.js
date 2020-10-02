@@ -45,7 +45,7 @@ export default function Login () {
     const[passwordState,setPasswordState]=useState(false);
 
     const changePage=()=>{
-        history.push('/CreateAccount');
+        history.push('/createAccount');
     }
 
     const validate=()=>{
@@ -126,7 +126,7 @@ export default function Login () {
                      />
                  </div>      
                  </div>
-                 <p className="forgot-Password" onClick={()=>{history.push("/ForgotPassword")}}>Forgot Password?</p>               
+                 <p className="forgot-Password" onClick={()=>{history.push("/forgotpassword")}}>Forgot Password?</p>               
                  <div style={{display:"flex" ,justifyContent:"space-between",margin:"9px"}}> 
                     <p className="create-account"onClick={()=>{changePage()}}>Create Account</p>                       
                      <Button variant="contained" size="medium" color="primary" 

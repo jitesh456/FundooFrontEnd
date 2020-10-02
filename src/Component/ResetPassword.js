@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {InputGroup,FormControl,Card,Button,Form} from 'react-bootstrap';
-export default function ResetPassword(){
+import DataService from '../Service/DataService'
+export default function ResetPassword(props){
 
     const passwordPattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@|.|!|#])(?=.*[a-zA-Z]).{8,}$/;    
     const [password, setPassword] = useState('');
@@ -10,30 +11,51 @@ export default function ResetPassword(){
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [confirmPasswordErrorStatus, setConfirmPasswordErrorStatus] = useState(true);
 
-    const handleSubmit = (event) => {
-      
-      if(!passwordPattern.test(password)){
-          setPasswordError('Not a valid Password');
-          setPasswordErrorStatus(false);  
-          event.preventDefault();
-          event.stopPropagation();        
-      }
-      if(confirmPassword !== password || !passwordPattern.test(password) ){
-        setConfirmPasswordError('confirm password must be same as password');
-        setConfirmPasswordErrorStatus(false);  
-        event.preventDefault();
-        event.stopPropagation();        
-     }
-     if(passwordPattern.test(password)){
-        setPasswordError('');
-        setPasswordErrorStatus(true);                
+    const validate=()=>{
+        var result =true;
+        if(!passwordPattern.test(password)){
+            setPasswordError('Not a valid Password');
+            setPasswordErrorStatus(false);  
+            result=false;     
+        }
+        if(confirmPassword !== password || !passwordPattern.test(password) ){
+          setConfirmPasswordError('confirm password must be same as password');
+          setConfirmPasswordErrorStatus(false);  
+                 
+          result=false;
+       }
+       return result;
     }
-    if(confirmPassword === password && passwordPattern.test(password) ){
-      setConfirmPasswordError('');
-      setConfirmPasswordErrorStatus(true);  
-             
+
+    const reset=()=>{
+        const data={
+            "newPassword":password
+        }
+        DataService.reset(data).then(response=>{
+            console.log(response.data.message);
+        }).catch(error=>{
+            console.log(error);
+        });
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+    let token=props.match.params.token;
+    localStorage.setItem('token',token);
+
+     var result=validate();
+     if(result){
+        setPasswordError('');
+        setPasswordErrorStatus(true);                    
+        setConfirmPasswordError('');
+        setConfirmPasswordErrorStatus(true);  
+        reset(); 
    }
-      
+   
+    
+    
+    
    
     };
 

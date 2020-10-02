@@ -12,9 +12,9 @@ function App() {
       <Router>        
         <Switch>
           <Route path="/" exact component={Login}/>
-          <Route path="/CreateAccount" exact component={CreateAccount}/>
-          <Route path="/ForgotPassword" exact component={ForgotPassword}/>
-          <Route path="/ResetPassword" exact component={ResetPassword}/>
+          <Route path="/createaccount" exact component={CreateAccount}/>
+          <Route path="/forgotpassword" exact component={ForgotPassword}/>
+          <Route path="/resetpassword/:token"  component={ResetPassword}/>
          </Switch>
       </Router>
     </div>
