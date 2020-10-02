@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import {useHistory} from  'react-router-dom'
+import DataService from '../Service/DataService';
 
 
 const theme = createMuiTheme({
@@ -47,24 +48,43 @@ export default function Login () {
         history.push('/CreateAccount');
     }
 
-    const handleSubmit=()=>{
-        console.log(emailId,password)                
+    const validate=()=>{
+        var result=true;
+
         if(!emailPattern.test(emailId)){
             setEmailError('plz provide valid email');
             setEmailState(true);
+            result=false;
         }
         if(!passwordPattern.test(password)){
             setPasswordError('plz provide valid password');
             setPasswordState(true);
+            result=false;
         }
-        if(emailPattern.test(emailId)){
+        return result
+    }
+    const login=()=>{
+        var data={            
+            "email":emailId,
+            "password":password,
+            "cartId":""
+        }
+        DataService.login(data).then(response=>{
+            console.log(response.data);
+        }).catch(error=>{
+            console.log(error);
+        });
+    }
+    const handleSubmit=()=>{
+        console.log(emailId,password) 
+        var result=validate();               
+        if(result){
             setEmailError('');
             setEmailState(false);
-        }
-        if(passwordPattern.test(password)){
             setPasswordError('');
-            setPasswordState(false);
-        }
+            setPasswordState(false)
+            login();
+        }        
     }
 
     return (
@@ -106,7 +126,7 @@ export default function Login () {
                      />
                  </div>      
                  </div>
-                 <p className="forgot-Password">Forgot Password?</p>               
+                 <p className="forgot-Password" onClick={()=>{history.push("/ForgotPassword")}}>Forgot Password?</p>               
                  <div style={{display:"flex" ,justifyContent:"space-between",margin:"9px"}}> 
                     <p className="create-account"onClick={()=>{changePage()}}>Create Account</p>                       
                      <Button variant="contained" size="medium" color="primary" 

@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {InputGroup,FormControl,Card,Button,Form} from 'react-bootstrap';
+import DataService from '../Service/DataService';
 
 export default function ForgotPassword(){
 
@@ -8,7 +9,17 @@ export default function ForgotPassword(){
     const [emailError,setEmailError]=useState('');
     const [emailErrorStatus,setEmailErrorStatus]=useState(true);
 
+    const forgotPassword=()=>{
+        const Data={"email":email};
+        DataService.resetPassword(Data).then(response=>{
+            console.log(response.Data);
+        }).catch(error=>{
+            console.log(error);
+        })
+    }
+
     const handleSubmit=(event)=>{
+        event.preventDefault();
         if(!emailPattern.test(email))
         {
             setEmailError('Invaild Email Formate');
@@ -18,8 +29,9 @@ export default function ForgotPassword(){
         }
         if(emailPattern.test(email))
         {
-            setEmailError('Invaild Email Formate');
-            setEmailErrorStatus(false);           
+            setEmailError('');
+            setEmailErrorStatus(true);    
+            forgotPassword();       
         }
 
     }

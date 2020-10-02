@@ -10,7 +10,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { useHistory } from 'react-router';
-
+import DataService from '../Service/DataService';
 const theme = createMuiTheme({
     palette: {        
         secondary: {
@@ -53,50 +53,76 @@ export default function CreateAccount(){
     const [confirmPasswordError,setConfirmPasswordError]=useState('');
     const [confirmPasswordErrorState,setConfirmPasswordErrorState]=useState('');
 
-    const handleSubmit=()=>{
-        console.log(firstName);
+    const createAccount=()=>{
+        const Data=
+            {
+                "firstName": firstName,
+                "lastName": lastName, 
+                "phoneNumber": "",
+                "imageUrl": "",
+                "password":password,
+                "service": "advance",
+                "email": userName+"@gmail.com",
+                "cartId": ""
+            }        
+        DataService.addUser(Data).then(response=>{
+            console.log(response.Data.Data);
+        }).catch(error=>{
+            console.log(error);
+        });
+        
+        
+    }
+    const validate=()=>{
+        var result=true;
         if(!namePattern.test(firstName)){
             setFirstNameError('Name must not include number')
             setFirstNameErrorStatus(true);
+            result=false
         }
         if(!namePattern.test(lastName)){
             setLastNameError('Name must not include number')
             setLastNameErrorStatus(true);
+            result =false;
         }
         if(!userNamePattern.test(userName)){
             setUsernameError('User Name Must Not Start with number')
             setUsernameErrorStatus(true);
+            result=false;
         }
         if(!passwordPattern.test(password)){
             setPasswordError('Invalid Password')
             setPasswordErrorState(true);
+            result=false;
         }
         if(confirmPassword!==password || confirmPassword===""){
             setConfirmPasswordError('Confirm password and password must be same')
             setConfirmPasswordErrorState(true);
+            result=false;
         }
-        if(namePattern.test(firstName)){
+
+        return result
+        
+    }
+
+    const handleSubmit=()=>{
+        console.log(firstName);
+        const result=validate();
+        
+        if(result){
             setFirstNameError('')
-            setFirstNameErrorStatus(false);
-        }
-        if(namePattern.test(lastName)){
+            setFirstNameErrorStatus(false); 
             setLastNameError('')
             setLastNameErrorStatus(false);
-        }
-        if(userNamePattern.test(userName)){
             setUsernameError('')
             setUsernameErrorStatus(false);
-        }
-        if(passwordPattern.test(password)){
             setPasswordError('')
             setPasswordErrorState(false);
+            setConfirmPasswordError('')
+            setConfirmPasswordErrorState(false);
+            createAccount();
         }
-        if(confirmPassword===password && confirmPassword!==""){
-            setConfirmPasswordError('Confirm password and password must be same')
-            setConfirmPasswordErrorState(true);
-        }
-        
-        
+                  
     }
     const changePage=()=>{
         history.push('/');
