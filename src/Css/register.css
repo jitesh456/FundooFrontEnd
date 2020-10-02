@@ -72,15 +72,17 @@
     }
     .name{
         flex-direction: column;
-        height: 120px;
+        height: 140px;
+        justify-content: space-evenly;
     }
     .email-field{
         padding-left: 3%;
         padding-right: 3%;
-        margin:20px 0 20px 0;
+        margin:20px 0 10px 0;
     }
     .helperText{
         padding-left: 3%;
+        margin-top: 10px;        
     }
 
 }
@@ -94,11 +96,29 @@
     .card-register{        
         height: 640px;        
     }
+    .helperText{
+        font-size: 14px;
+    }
+    .register-text{
+        font-size: 16px;
+    }
+    .name{
+        height: 155px;
+    }
 }
-@media screen and (max-width: 360px)
-{
-    .card-register{        
-        height: 568px;        
+@media screen and (max-width:280px){
+
+    .register-text{
+        font-size: 16px;
+    }
+    .card-register{
+        height: 653px;        
+    }
+    .helperText{
+        font-size: 14px;
+    }
+    .name{
+        height: 160px;
     }
 }
 
