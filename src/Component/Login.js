@@ -8,6 +8,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import {useHistory} from  'react-router-dom'
 import DataService from '../Service/DataService';
+import CustomToast from './CustomToast'
 
 
 const theme = createMuiTheme({
@@ -43,6 +44,8 @@ export default function Login () {
     const[passwordError,setPasswordError]=useState('');
     const[emailState,setEmailState]=useState(false);
     const[passwordState,setPasswordState]=useState(false);
+    const[toastMessage,setToastMessage]=useState('');
+    const[toastDisplay,setToastDisplay]=useState(false);
 
     const changePage=()=>{
         history.push('/createAccount');
@@ -71,8 +74,12 @@ export default function Login () {
         }
         DataService.login(data).then(response=>{
             console.log(response.data);
+            setToastDisplay(true);
+            setToastMessage("Login Success");
         }).catch(error=>{
             console.log(error);
+            setToastDisplay(true);
+            setToastMessage("Login Failed");
         });
     }
     const handleSubmit=()=>{
@@ -135,9 +142,19 @@ export default function Login () {
                      Login
                      </Button>
                  </div>
-             </form>
+             </form>             
          </ThemeProvider>        
      </Card>
+           <div
+                style={{
+                position: 'absolute',
+                top: 3,
+                right: 0,
+                width:"500px"
+                }}
+            >
+             <CustomToast  message={toastMessage} display={toastDisplay}/>
+            </div>
      </div>
     );
            
