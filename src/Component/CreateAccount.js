@@ -11,6 +11,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { useHistory } from 'react-router';
 import DataService from '../Service/DataService';
+import CustomToast from './CustomToast'
+
 const theme = createMuiTheme({
     palette: {        
         secondary: {
@@ -52,6 +54,8 @@ export default function CreateAccount(){
     const [confirmPassword,setConfirmPassword]=useState('');
     const [confirmPasswordError,setConfirmPasswordError]=useState('');
     const [confirmPasswordErrorState,setConfirmPasswordErrorState]=useState('');
+    const[toastMessage,setToastMessage]=useState('');
+    const[toastDisplay,setToastDisplay]=useState(false);
 
     const createAccount=()=>{
         const Data=
@@ -67,8 +71,12 @@ export default function CreateAccount(){
             }        
         DataService.addUser(Data).then(response=>{
             console.log(response.Data.Data);
+            setToastMessage(response.data.message)
+            setToastDisplay(true);
         }).catch(error=>{
             console.log(error);
+            setToastMessage("Failed to create Account")
+            setToastDisplay(true);
         });
         
         
@@ -230,6 +238,16 @@ export default function CreateAccount(){
                 </form>
             </ThemeProvider>        
         </Card>
+             <div
+                style={{
+                position: 'absolute',
+                top: 3,
+                right: 0,
+                width:"500px"
+                }}
+            >
+             <CustomToast  message={toastMessage} display={toastDisplay}/>
+            </div>
         </div>
     );
 }
