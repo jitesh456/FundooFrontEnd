@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {InputGroup,FormControl,Card,Button,Form} from 'react-bootstrap';
 import DataService from '../Service/DataService';
+import CustomToast from './CustomToast'
 
 export default function ForgotPassword(){
 
@@ -8,13 +9,20 @@ export default function ForgotPassword(){
     const [email,setEmail]=useState('');
     const [emailError,setEmailError]=useState('');
     const [emailErrorStatus,setEmailErrorStatus]=useState(true);
+    const[toastMessage,setToastMessage]=useState('');
+    const[toastDisplay,setToastDisplay]=useState(false);
 
     const forgotPassword=()=>{
         const Data={"email":email};
         DataService.resetPassword(Data).then(response=>{
             console.log(response.Data);
+            setToastMessage(response.data.message)
+            setToastDisplay(true);
         }).catch(error=>{
             console.log(error);
+            console.log('bro');
+            setToastMessage('Email does not Exist');
+            setToastDisplay(true);
         })
     }
 
@@ -73,7 +81,16 @@ export default function ForgotPassword(){
             </Form>
             </Card.Body>
             </Card>
-           
+            <div
+                style={{
+                position: 'absolute',
+                top: 3,
+                right: 0,
+                width:"500px"
+                }}
+            >
+             <CustomToast  message={toastMessage} display={toastDisplay}/>
+            </div>
         </div>
     )
 

@@ -137,7 +137,7 @@ export default function Login () {
                  <div style={{display:"flex" ,justifyContent:"space-between",margin:"9px"}}> 
                     <p className="create-account"onClick={()=>{changePage()}}>Create Account</p>                       
                      <Button variant="contained" size="medium" color="primary" 
-                     style={{margin:"6px",background:"#1F45FC"}}
+                     style={{margin:"6px",background:"#1F45FC",outline:"none"}}
                      onClick={()=>{handleSubmit()}} >
                      Login
                      </Button>

@@ -108,9 +108,7 @@ export default function CreateAccount(){
             setConfirmPasswordErrorState(true);
             result=false;
         }
-
-        return result
-        
+        return result        
     }
 
     const handleSubmit=()=>{
@@ -229,7 +227,7 @@ export default function CreateAccount(){
                     <div style={{display:"flex" ,justifyContent:"space-between",margin:"9px",marginTop:"5%"}}>  
                             <p className="create-account"onClick={()=>{changePage()}}>Sign In</p>                
                             <Button variant="contained" size="medium" color="primary" 
-                                style={{margin:"6px",background:"#1F45FC"}}
+                                style={{margin:"6px",background:"#1F45FC",outline:"none"}}
                                 onClick={()=>{handleSubmit()}}
                                 >
                                 Create Account

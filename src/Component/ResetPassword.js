@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import {InputGroup,FormControl,Card,Button,Form} from 'react-bootstrap';
 import DataService from '../Service/DataService'
+import CustomToast from './CustomToast'
+
 export default function ResetPassword(props){
 
     const passwordPattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@|.|!|#])(?=.*[a-zA-Z]).{8,}$/;    
@@ -10,6 +12,8 @@ export default function ResetPassword(props){
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [confirmPasswordErrorStatus, setConfirmPasswordErrorStatus] = useState(true);
+    const[toastMessage,setToastMessage]=useState('');
+    const[toastDisplay,setToastDisplay]=useState(false);
 
     const validate=()=>{
         var result =true;
@@ -19,7 +23,7 @@ export default function ResetPassword(props){
             result=false;     
         }
         if(confirmPassword !== password || !passwordPattern.test(password) ){
-          setConfirmPasswordError('confirm password must be same as password');
+          setConfirmPasswordError('user is not authorized');
           setConfirmPasswordErrorStatus(false);  
                  
           result=false;
@@ -33,8 +37,12 @@ export default function ResetPassword(props){
         }
         DataService.reset(data).then(response=>{
             console.log(response.data.message);
+            setToastMessage(response.data.message)
+            setToastDisplay(true);
         }).catch(error=>{
             console.log(error);
+            setToastMessage('User is unauthorized');
+            setToastDisplay(true);
         });
     }
 
@@ -108,7 +116,16 @@ export default function ResetPassword(props){
             </Form>
             </Card.Body>
             </Card>
-           
+            <div
+                style={{
+                position: 'absolute',
+                top: 3,
+                right: 0,
+                width:"500px"
+                }}
+            >
+             <CustomToast  message={toastMessage} display={toastDisplay}/>
+            </div>
         </div>
     )
 
