@@ -30,17 +30,18 @@ export default function ResetPassword(props){
        }
        return result;
     }
-
+    
     const reset=()=>{
         const data={
             "newPassword":password
         }
-        DataService.reset(data).then(response=>{
+
+        DataService.reset(data).then(response=>{            
             console.log(response.data.message);
             setToastMessage(response.data.message)
             setToastDisplay(true);
-        }).catch(error=>{
-            console.log(error);
+        }).catch((error)=>{
+            console.log(error.response);
             setToastMessage('User is unauthorized');
             setToastDisplay(true);
         });
@@ -51,6 +52,7 @@ export default function ResetPassword(props){
         
     let token=props.match.params.token;
     localStorage.setItem('token',token);
+
 
      var result=validate();
      if(result){
@@ -124,7 +126,7 @@ export default function ResetPassword(props){
                 width:"500px"
                 }}
             >
-             <CustomToast  message={toastMessage} display={toastDisplay}/>
+             <CustomToast onClose={()=>{setToastDisplay(false)}} message={toastMessage} display={toastDisplay}/>
             </div>
         </div>
     )

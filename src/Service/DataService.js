@@ -22,7 +22,7 @@ import AxiosService from './AxiosService';
         const token=localStorage.getItem('token');
         var headers={            
         }
-        var url='http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password'+`?access_token=${token}`;
+        var url='http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password'.concat(`?access_token=${token}`);
         return this.AxiosService.post(url,data,true,headers);
     }
     

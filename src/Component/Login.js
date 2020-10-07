@@ -72,12 +72,13 @@ export default function Login () {
             "password":password,
             "cartId":""
         }
+        console.log({toastDisplay});
         DataService.login(data).then(response=>{
             console.log(response.data);
-            setToastDisplay(true);
+            setToastDisplay(value=>({...value,[toastDisplay]:true}));
             setToastMessage("Login Success");
         }).catch(error=>{
-            console.log(error);
+            console.log(error);            
             setToastDisplay(true);
             setToastMessage("Login Failed");
         });
@@ -153,7 +154,7 @@ export default function Login () {
                 width:"500px"
                 }}
             >
-             <CustomToast  message={toastMessage} display={toastDisplay}/>
+             <CustomToast  onClose={()=>{setToastDisplay(false)}} message={toastMessage} display={toastDisplay}/>
             </div>
      </div>
     );

@@ -89,7 +89,7 @@ export default function ForgotPassword(){
                 width:"500px"
                 }}
             >
-             <CustomToast  message={toastMessage} display={toastDisplay}/>
+             <CustomToast onClose={()=>{setToastDisplay(false)}} message={toastMessage} display={toastDisplay}/>
             </div>
         </div>
     )

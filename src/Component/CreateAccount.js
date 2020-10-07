@@ -70,12 +70,11 @@ export default function CreateAccount(){
                 "cartId": ""
             }        
         DataService.addUser(Data).then(response=>{
-            console.log(response.Data.Data);
-            setToastMessage(response.data.message)
+            console.log(response);
+            setToastMessage(response.data.data.message)
             setToastDisplay(true);
         }).catch(error=>{
-            console.log(error);
-            setToastMessage("Failed to create Account")
+            console.log(error);        
             setToastDisplay(true);
         });
         
@@ -244,7 +243,7 @@ export default function CreateAccount(){
                 width:"500px"
                 }}
             >
-             <CustomToast  message={toastMessage} display={toastDisplay}/>
+             <CustomToast onClose={()=>{setToastDisplay(false)}} message={toastMessage} display={toastDisplay}/>
             </div>
         </div>
     );

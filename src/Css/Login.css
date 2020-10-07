@@ -2,7 +2,8 @@
 .form {
     display: flex;
     justify-content: center;
-    margin-top: 10%;
+    align-items: center;
+    height: 100%;
 }
 .create-account {
     color:#1a73e8;
@@ -25,7 +26,6 @@
 }
 
 .email{
-
     border: 1px solid silver;
     border-radius: 24px;
     display: flex;
@@ -60,14 +60,14 @@
 {
 
 	.card{
-		width: 26%;	
+		width: 32%;	
 	}
 }
 @media screen and (max-width: 768px)
 {
 
 	.card{
-		width: 35%;	
+		width: 40%;	
 	}
 }
 @media screen and (max-width: 540px)
