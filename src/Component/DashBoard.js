@@ -5,6 +5,7 @@ import {ReactComponent as SearchLogo}  from '../Assets/Search.svg';
 import {ReactComponent as ClearIcon}  from '../Assets/Clear.svg';
 import Drawar from './Drawar';
 import DrawarOpen from './DrawarOpen';
+import CreateNote from '../Component/CreateNote';
 
 export default class DashBoard extends React.Component{
     constructor(props){
@@ -27,12 +28,12 @@ export default class DashBoard extends React.Component{
         if(!this.state.active && this.state.open===false)
         {
             this.setState({open:true})
-            this.setState({drawarWidth:"drawar-width-open"})
+            this.setState({drawarWidth:"drawar-width-open drawar-position"})
         }
         if(!this.state.active && this.state.open===true)
         {
             this.setState({open:false})
-            this.setState({drawarWidth:"drawar-width"})
+            this.setState({drawarWidth:"drawar-width drawar-position"})
         }
     }
     
@@ -90,10 +91,13 @@ export default class DashBoard extends React.Component{
                         </Dropdown.Menu>
                     </Dropdown>
                     </div>                    
-                </Navbar>                 
+                </Navbar>   
+                <div style={{display:"flex",height:"89.2%"}}>              
                 <div className={this.state.drawarWidth} onMouseEnter={()=>{this.handleMouseHover()}} 
                 onMouseLeave={()=>{this.handleMouseHover()}}>                
                  {this.displayDrawar()}                                                  
+                </div>
+                <CreateNote display={this.state.open} onClick={this.state.open}/>
                 </div>
             </>
         );

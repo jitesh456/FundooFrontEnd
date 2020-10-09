@@ -18,7 +18,8 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "sass": "^1.26.12"
   },
   "scripts": {
     "start": "set PORT=4200 && react-scripts start",

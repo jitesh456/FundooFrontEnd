@@ -75,8 +75,10 @@ export default function Login () {
         console.log({toastDisplay});
         DataService.login(data).then(response=>{
             console.log(response.data);
+            localStorage.setItem('Token',response.data.id);
             setToastDisplay(value=>({...value,[toastDisplay]:true}));
             setToastMessage("Login Success");
+            history.push('/dashboard');
         }).catch(error=>{
             console.log(error);            
             setToastDisplay(true);
@@ -157,7 +159,6 @@ export default function Login () {
              <CustomToast  onClose={()=>{setToastDisplay(false)}} message={toastMessage} display={toastDisplay}/>
             </div>
      </div>
-    );
-           
+    );           
 }
 
