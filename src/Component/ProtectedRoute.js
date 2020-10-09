@@ -9,6 +9,7 @@ import React from 'react';
             <Route  path={props.path}  exact={props.exact} component={props.component} />
        );    
     }
+    
     if(localStorage.getItem("Token") === null)        
     {
         return(<Redirect  to="/"  />);

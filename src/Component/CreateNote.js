@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import '../Css/CreateNot.scss';
 import Menubar from '../Component/MenuBar';
-import UserService from '../Service/UserService';
+import UserService from '../Service/NoteService';
 
 export default function CreateNote(props){
 
@@ -10,7 +10,7 @@ export default function CreateNote(props){
     const[discription,setDiscription]=useState('');
 
     const createNote=()=>{
-        if(!title==="" && !discription==="")
+        if(title !=="" && discription !=="")
         {   
             const data={
                 "title": title,
@@ -21,8 +21,10 @@ export default function CreateNote(props){
             }
             UserService.addCard(data).then((response)=>{
                 console.log(response.data)
+                props.GetNotes();
                 setDiscription('');
                 setTitle('');
+
             }).catch(error=>{
                 console.log(error);
             })
@@ -30,7 +32,6 @@ export default function CreateNote(props){
     }
     return(
         <>
-            <div className="create-note-container">
                 <div className="add-note" >
                 <div style={!display?{display:"none"}: {display:"block",width:"100%"}}>
                 <input
@@ -48,11 +49,10 @@ export default function CreateNote(props){
                 onChange={(event)=>{setDiscription(event.target.value)}}                              
                 />               
                 </div>
-                    <div  style={!display?{display:"none"}: {display: "flex",justifyContent: "space-between",paddingTop: "12px"}}>
+                    <div  style={!display?{display:"none"}: {display: "flex",justifyContent: "space-between",paddingTop: "12px",paddingBottom:"12px"}}>
                         <Menubar/><button id="closeButton" onClick={()=>{setDisplay(false);createNote()}} >Close</button>
                     </div>
                 </div>
-            </div>
         </>
     )
 }

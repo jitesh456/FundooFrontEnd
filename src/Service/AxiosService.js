@@ -5,7 +5,6 @@ export default function AxiosService(){
 
 }
 
-
 AxiosService.prototype.post=function(url,data,isHeader=false,Header){
     return axios.post(url,data,isHeader && Header)
 }

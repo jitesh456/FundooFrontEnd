@@ -1,11 +1,16 @@
 import {Navbar,Button,Dropdown} from 'react-bootstrap';
 import React from 'react';
-import '../Css/Dashboard.css'
+import '../Css/Dashboard.css';
 import {ReactComponent as SearchLogo}  from '../Assets/Search.svg';
 import {ReactComponent as ClearIcon}  from '../Assets/Clear.svg';
 import Drawar from './Drawar';
 import DrawarOpen from './DrawarOpen';
+import  NoteService from '../Service/NoteService';
 import CreateNote from '../Component/CreateNote';
+import DisplayNotes from '../Component/DisplayNotes';
+import history from '../Component/history';
+
+
 
 export default class DashBoard extends React.Component{
     constructor(props){
@@ -13,11 +18,25 @@ export default class DashBoard extends React.Component{
         this.state={
             open:false,
             active:false,            
-            drawarWidth:"drawar-width"
+            drawarWidth:"drawar-width",
+            notes:[]
         }
         this.wrapperRef=React.createRef();
     }
 
+    getNotes(){
+        NoteService.getNotes().then(response=>{
+            console.log(response.data.data.data);
+            this.setState({notes:response.data.data.data});
+        })
+        .catch(error=>{
+            console.log(error);
+        });
+    }
+
+    componentDidMount(){
+       this.getNotes();
+    }
     handleClick(){        
         !this.state.open?this.setState({drawarWidth:"drawar-width-open"}):this.setState({drawarWidth:"drawar-width"});
     }
@@ -85,7 +104,7 @@ export default class DashBoard extends React.Component{
                                 <span style={{fontFamily:"inherit",fontSize:"14px",color:"grey"}}>jitesh0dubey@gmail.com</span>
                                 </div>
                                 <div className="sign-out">
-                                <Button variant="light">Sign out</Button>
+                                <Button onClick={()=>{localStorage.clear();window.location.reload('/')}} variant="light">Sign out</Button>
                                 </div>                             
                             </div>                           
                         </Dropdown.Menu>
@@ -97,8 +116,11 @@ export default class DashBoard extends React.Component{
                 onMouseLeave={()=>{this.handleMouseHover()}}>                
                  {this.displayDrawar()}                                                  
                 </div>
-                <CreateNote display={this.state.open} onClick={this.state.open}/>
-                </div>
+                    <div className="create-note-container">
+                        <CreateNote GetNotes={()=>{this.getNotes()}} />
+                        <DisplayNotes GetNotes={()=>{this.getNotes()}} notes={this.state.notes}/>                    
+                    </div>                  
+                </div>              
             </>
         );
     }    

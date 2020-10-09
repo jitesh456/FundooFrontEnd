@@ -6,9 +6,9 @@ import '../Css/CreateNot.scss';
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';
 import {ReactComponent as ArchiveIcon} from '../Assets/Archive.svg';
 
-export default function Menubar(){
+export default function Menubar(props){
     return(
-        <div style={{display:"flex",justifyContent:"space-between",width:"60%"}}>
+        <div className={props.className}style={{display:"flex",justifyContent:"space-between",width:"60%"}}>
            <AddAlertIcon className="icon-design"/>
            <PersonAddIcon className="icon-design"/>
            <ColorLensIcon className="icon-design"/>
