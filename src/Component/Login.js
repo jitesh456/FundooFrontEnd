@@ -73,9 +73,9 @@ export default function Login () {
             "cartId":""
         }
         console.log({toastDisplay});
-        DataService.login(data).then(response=>{
+        DataService.login(data).then(async (response)=>{
             console.log(response.data);
-            localStorage.setItem('Token',response.data.id);
+            await localStorage.setItem('Token',response.data.id);
             setToastDisplay(value=>({...value,[toastDisplay]:true}));
             setToastMessage("Login Success");
             history.push('/dashboard');

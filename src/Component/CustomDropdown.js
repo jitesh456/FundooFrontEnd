@@ -26,7 +26,7 @@ export default function CustomDropdown(props){
 
     return(
         <Dropdown>
-            <Dropdown.Toggle style={{ padding:"0px" }} variant="light" id="dropdown-basic">
+            <Dropdown.Toggle style={{ padding:"0px" ,backgroundColor:"transparent",border:"none" }} variant="light" id="dropdown-basic">
                 <DragIndicatorIcon style={{ color:"#5f6368"}} />
             </Dropdown.Toggle>
 

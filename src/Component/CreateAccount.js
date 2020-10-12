@@ -13,6 +13,7 @@ import { useHistory } from 'react-router';
 import DataService from '../Service/DataService';
 import CustomToast from './CustomToast'
 
+
 const theme = createMuiTheme({
     palette: {        
         secondary: {
@@ -245,6 +246,7 @@ export default function CreateAccount(){
             >
              <CustomToast onClose={()=>{setToastDisplay(false)}} message={toastMessage} display={toastDisplay}/>
             </div>
+            
         </div>
     );
 }

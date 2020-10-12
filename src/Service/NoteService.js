@@ -2,14 +2,14 @@ import AxiosService from './AxiosService';
 
 const baseurl="http://fundoonotes.incubation.bridgelabz.com/api/notes";
 const token=localStorage.getItem('Token');
-
+console.log(token);
 const header={headers:{
     "Content-Type":'application/json',
     "Authorization":localStorage.getItem('Token')
 }
  }
 
- class UserService{
+ class NoteService{
     constructor(){
         this.AxiosService=new AxiosService();
     }
@@ -23,6 +23,10 @@ const header={headers:{
 
     getNotes=()=>{
         var url=baseurl.concat("/getNotesList");
+        const header={headers:{
+            "Content-Type":'application/json',
+            "Authorization":localStorage.getItem('Token')
+        }}
         return this.AxiosService.get(url,true,header);
     }
 
@@ -31,6 +35,15 @@ const header={headers:{
         var url=baseurl.concat("/trashNotes");
         return this.AxiosService.post(url,Data,true,header);
     } 
+
+    UpdateNotes=(Data)=>{
+        var url=baseurl.concat("/updateNotes");
+        return this.AxiosService.post(url,Data,true,header);
+    }
+    changeColor=(Data)=>{
+        var url=baseurl.concat("/changesColorNotes");
+        return this.AxiosService.post(url,Data,true,header);
+    }
 }
 
-export default new UserService();
+export default new NoteService();

@@ -7,7 +7,7 @@ export default function CreateNote(props){
 
     const[display,setDisplay]=useState(false)
     const[title,setTitle]=useState('');
-    const[discription,setDiscription]=useState('');
+    const[discription,setDiscription]=useState('');    
 
     const createNote=()=>{
         if(title !=="" && discription !=="")
@@ -52,6 +52,7 @@ export default function CreateNote(props){
                     <div  style={!display?{display:"none"}: {display: "flex",justifyContent: "space-between",paddingTop: "12px",paddingBottom:"12px"}}>
                         <Menubar/><button id="closeButton" onClick={()=>{setDisplay(false);createNote()}} >Close</button>
                     </div>
+                    
                 </div>
         </>
     )

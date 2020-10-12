@@ -8,7 +8,7 @@ import DrawarOpen from './DrawarOpen';
 import  NoteService from '../Service/NoteService';
 import CreateNote from '../Component/CreateNote';
 import DisplayNotes from '../Component/DisplayNotes';
-import history from '../Component/history';
+
 
 
 
@@ -36,6 +36,7 @@ export default class DashBoard extends React.Component{
 
     componentDidMount(){
        this.getNotes();
+       
     }
     handleClick(){        
         !this.state.open?this.setState({drawarWidth:"drawar-width-open"}):this.setState({drawarWidth:"drawar-width"});
