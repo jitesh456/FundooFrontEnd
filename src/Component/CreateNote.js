@@ -21,12 +21,14 @@ export default function CreateNote(props){
             }
             UserService.addCard(data).then((response)=>{
                 console.log(response.data)
-                props.GetNotes();
+                
                 setDiscription('');
                 setTitle('');
+                props.GetNotes();
 
             }).catch(error=>{
                 console.log(error);
+
             })
         }
     }
@@ -37,6 +39,7 @@ export default function CreateNote(props){
                 <input
                 className="create-note"
                 type="text"
+                value={title}
                 placeholder="Title"  
                 onChange={(event)=>{setTitle(event.target.value)}}              
                 />
@@ -44,13 +47,14 @@ export default function CreateNote(props){
                 <div onClick={()=>{setDisplay(true)}} style={{width:"100%"}} >
                 <input
                 className="create-note"
+                value={discription}
                 type="text"
                 placeholder="Take a Note .."
                 onChange={(event)=>{setDiscription(event.target.value)}}                              
                 />               
                 </div>
                     <div  style={!display?{display:"none"}: {display: "flex",justifyContent: "space-between",paddingTop: "12px",paddingBottom:"12px"}}>
-                        <Menubar/><button id="closeButton" onClick={()=>{setDisplay(false);createNote()}} >Close</button>
+                       <div style={{width:"70%"}}> <Menubar/></div><div style={{display:"flex"}}><button  id="closeButton" onClick={()=>{setDisplay(false);createNote()}} >Close</button></div>
                     </div>
                     
                 </div>

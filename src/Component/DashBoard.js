@@ -39,7 +39,7 @@ export default class DashBoard extends React.Component{
        
     }
     handleClick(){        
-        !this.state.open?this.setState({drawarWidth:"drawar-width-open"}):this.setState({drawarWidth:"drawar-width"});
+        !this.state.open?this.setState({drawarWidth:"drawar-width-open-relative"}):this.setState({drawarWidth:"drawar-width"});
     }
 
     handleMouseHover=()=>{
@@ -79,7 +79,7 @@ export default class DashBoard extends React.Component{
                     <div style={{width:"50px"}}>
                     <img height="40px" alt="MenuLogo" src={require('../Assets/Keep.png')}/>    
                     </div>
-                    <div style={{width:"15%",paddingLeft:"1%",display:"flex"}}>
+                    <div className="nav-title">
                     <span style={{fontSize:"22px"}}>Fundoo</span>
                     </div>
                     <div className="search-bar">
@@ -112,7 +112,7 @@ export default class DashBoard extends React.Component{
                     </Dropdown>
                     </div>                    
                 </Navbar>   
-                <div style={{display:"flex",height:"89.2%"}}>              
+                <div className="drawar-container">              
                 <div className={this.state.drawarWidth} onMouseEnter={()=>{this.handleMouseHover()}} 
                 onMouseLeave={()=>{this.handleMouseHover()}}>                
                  {this.displayDrawar()}                                                  

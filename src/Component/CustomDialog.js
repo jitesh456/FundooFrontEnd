@@ -1,8 +1,10 @@
 
 import React,{useState,useEffect} from 'react';
-import  {Modal,Container,Button} from 'react-bootstrap';
+import  {Modal,Button} from 'react-bootstrap';
 import  NoteService from '../Service/NoteService';
 import   '../Css/CreateNot.scss';
+import   '../Css/update.scss';
+import Menubar from '../Component/MenuBar';
 
 
 export default function CustomDialog(props) {
@@ -35,33 +37,32 @@ export default function CustomDialog(props) {
         })
     }
     return (
-      <Modal className="modal" {...props} >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Update Notes
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="show-grid">
-          <Container>
-                <input
+      <Modal {...props}  size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered >
+        <div className="update-title">
+          <input
                 className="create-note"
                 type="text"
                 value={title}
                 placeholder="Title"  
                 onChange={(e)=>{setTitle(e.target.value)}}          
-                />
+                />          
+        </div>
+          <div className="update-title">
+                
                 <input
-                className="create-note"
+                className="update-note-description"
                 type="text"
                 value={description}
                 placeholder="Discription"  
                 onChange={(e)=>{setDescription(e.target.value)}}                   
                 />
-          </Container>
-        </Modal.Body> 
-        <Modal.Footer>
-            <Button onClick={()=>{updateNotes();props.onHide()}}>Update</Button>
-        </Modal.Footer>    
+          
+        </div>
+        <div className="update-footer">
+          <div style={{ width:"68%" ,marginLeft:"2%"}}> <Menubar/></div><Button style={{marginRight:"2%"}} variant="light" onClick={()=>{updateNotes();props.onHide()}}>Close</Button>
+        </div>
       </Modal>
     );
   }

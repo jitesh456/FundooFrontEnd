@@ -2,7 +2,6 @@ import React,{useState}  from 'react';
 import {Card} from 'react-bootstrap';
 import '../Css/CreateNot.scss';
 import MenuBar from '../Component/MenuBar';
-import CustomDropdown from '../Component/CustomDropdown';
 import CustomDialog from '../Component/CustomDialog';
 
 export default function DisplayNotes(props){
@@ -21,7 +20,7 @@ export default function DisplayNotes(props){
             <Card className="notes-style" style={{ backgroundColor:note.color}}>
             <div onClick={()=>{handleOnClick(note)}} className="notes-title">{note.title}</div>
             <div className="notes-body">{note.description} </div>
-            <div className="notes-body"><MenuBar GetNotes={props.GetNotes} notesId={note.id} className="note-menu" /> <CustomDropdown style={{backgroundColor:"transparent"}}GetNotes={props.GetNotes} notesId={note.id}/></div>
+            <div className="notes-body"><MenuBar GetNotes={props.GetNotes} notesId={note.id} className="note-menu" /> </div>
             <CustomDialog GetNotes={props.GetNotes} notes={currentNote} show={show} onHide={()=>{setShow(false)}}/>
             </Card>
         );

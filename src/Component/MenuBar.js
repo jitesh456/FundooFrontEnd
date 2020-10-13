@@ -7,6 +7,7 @@ import {Dropdown} from 'react-bootstrap';
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';
 import {ReactComponent as ArchiveIcon} from '../Assets/Archive.svg';
 import NotesService from '../Service/NoteService';
+import CustomDropdown from '../Component/CustomDropdown';
 
 export default function Menubar(props){
 
@@ -25,11 +26,11 @@ export default function Menubar(props){
         
     }
     return(
-        <div className={props.className}style={{display:"flex",justifyContent:"space-between",width:"60%"}}>
+        <div className={props.className}style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%"}}>
            <AddAlertIcon className="icon-design"/>
            <PersonAddIcon className="icon-design"/>           
            <Dropdown>
-            <Dropdown.Toggle style={{ padding:"0px",border:"none",backgroundColor:"transparent",paddingBottom:"4px"}} variant="light" id="dropdown-basic">                
+            <Dropdown.Toggle style={{ padding:"0px",border:"none",backgroundColor:"transparent"}} variant="light" id="dropdown-basic">                
                 <ColorLensIcon className="icon-design"/>
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -50,6 +51,7 @@ export default function Menubar(props){
             </Dropdown>
            <CropOriginalIcon className="icon-design"/>
             <ArchiveIcon style={{fill:"#5f6368"}}className="icon-design" />
+            <CustomDropdown GetNotes={props.GetNotes} notesId={props.notesId}/>
         </div>
     )
 }
