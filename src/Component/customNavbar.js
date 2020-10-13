@@ -1,74 +1,12 @@
 import React from 'react';
-import '../Css/Dashboard.css';
-import Drawar from './Drawar';
-import DrawarOpen from './DrawarOpen';
-import  NoteService from '../Service/NoteService';
-import CreateNote from '../Component/CreateNote';
-import DisplayNotes from '../Component/DisplayNotes';
 import {Navbar,Button,Dropdown} from 'react-bootstrap';
 import {ReactComponent as SearchLogo}  from '../Assets/Search.svg';
 import {ReactComponent as ClearIcon}  from '../Assets/Clear.svg';
 
+export default function customNavbar(props){
 
-export default class DashBoard extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-            open:false,
-            active:false,            
-            drawarWidth:"drawar-width",
-            notes:[]
-        }
-        this.wrapperRef=React.createRef();
-    }
-
-    getNotes(){
-        NoteService.getNotes().then(response=>{
-            console.log(response.data.data.data);
-            this.setState({notes:response.data.data.data});
-        })
-        .catch(error=>{
-            console.log(error);
-        });
-    }
-
-    componentDidMount(){
-       this.getNotes();
-       
-    }
-    handleClick(){        
-        !this.state.open?this.setState({drawarWidth:"drawar-width-open-relative"}):this.setState({drawarWidth:"drawar-width"});
-    }
-
-    handleMouseHover=()=>{
-        
-        console.log(true);
-        if(!this.state.active && this.state.open===false)
-        {
-            this.setState({open:true})
-            this.setState({drawarWidth:"drawar-width-open drawar-position"})
-        }
-        if(!this.state.active && this.state.open===true)
-        {
-            this.setState({open:false})
-            this.setState({drawarWidth:"drawar-width drawar-position"})
-        }
-    }
-    
-    displayDrawar(){
-        if(!this.state.open){            
-            return(<Drawar />)
-        }
-        if(this.state.open){
-            return(<DrawarOpen />)
-        }
-    }
-
-    render(){      
-                
-        return(
-            <>
-                <Navbar  variant="light" style={{border:"1px solid silver"}}>
+    return(
+        <Navbar  variant="light" style={{border:"1px solid silver"}}>
                     <Navbar.Brand ><Button id="button" type="menu-fold" onClick={()=>{
                         this.setState({open:!this.state.open,active:!this.state.active},this.handleClick())
                     }} aria-controls="example-collapse-text"
@@ -109,18 +47,6 @@ export default class DashBoard extends React.Component{
                         </Dropdown.Menu>
                     </Dropdown>
                     </div>                    
-                </Navbar>    
-                <div className="drawar-container">              
-                <div className={this.state.drawarWidth} onMouseEnter={()=>{this.handleMouseHover()}} 
-                onMouseLeave={()=>{this.handleMouseHover()}}>                
-                 {this.displayDrawar()}                                                  
-                </div>
-                    <div className="create-note-container">
-                        <CreateNote GetNotes={()=>{this.getNotes()}} />
-                        <DisplayNotes GetNotes={()=>{this.getNotes()}} notes={this.state.notes}/>                    
-                    </div>                  
-                </div>              
-            </>
-        );
-    }    
+                </Navbar>   
+    );
 }

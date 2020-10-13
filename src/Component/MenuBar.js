@@ -36,14 +36,14 @@ export default function Menubar(props){
             <Dropdown.Menu>
                 <Dropdown.Item  >
                     <div style={{display: "flex",flexWrap: "wrap"}}>
-                        <div onClick={()=>{changeColor("#FF0000")}} style={{border:"1px solid red",backgroundColor: "red"}} className="color-chooser" ></div>
-                        <div onClick={()=>{changeColor("#800080")}} style={{border:"1px solid purple",backgroundColor: "purple"}} className="color-chooser"></div>
+                        <div onClick={()=>{changeColor("#ff8000")}} style={{border:"1px solid red",backgroundColor: "#ff8000"}} className="color-chooser" ></div>
+                        <div onClick={()=>{changeColor("#bf00ff")}} style={{border:"1px solid purple",backgroundColor: "#bf00ff"}} className="color-chooser"></div>
                         <div onClick={()=>{changeColor("#FFFF00")}} style={{border:"1px solid yellow",backgroundColor: "yellow"}} className="color-chooser" ></div>
-                        <div onClick={()=>{changeColor("#0000FF")}} style={{border:"1px solid blue",backgroundColor: "blue"}} className="color-chooser"></div>
-                        <div onClick={()=>{changeColor("#008000")}} style={{border:"1px solid green",backgroundColor: "green"}} className="color-chooser"></div>
+                        <div onClick={()=>{changeColor("#00ffff")}} style={{border:"1px solid blue",backgroundColor: "#00ffff"}} className="color-chooser"></div>
+                        <div onClick={()=>{changeColor("#00ff40")}} style={{border:"1px solid green",backgroundColor: "#00ff40"}} className="color-chooser"></div>
                         <div onClick={()=>{changeColor("#C0C0C0")}} style={{border:"1px solid silver",backgroundColor: "silver"}} className="color-chooser"></div>
                         <div onClick={()=>{changeColor("#FFFFFF")}} style={{border:"1px solid whitesmoke",backgroundColor: "whitesmoke"}} className="color-chooser"></div>
-                        <div onClick={()=>{changeColor("#800000")}} style={{border:"1px solid maroon",backgroundColor: "maroon"}} className="color-chooser"></div>
+                        <div onClick={()=>{changeColor("#a65959")}} style={{border:"1px solid maroon",backgroundColor: "#a65959"}} className="color-chooser"></div>
                         <div onClick={()=>{changeColor("#ADD8E6")}} style={{border:"1px solid lightblue",backgroundColor: "lightblue"}} className="color-chooser"></div>
                     </div>
                 </Dropdown.Item>            

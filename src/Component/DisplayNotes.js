@@ -19,15 +19,15 @@ export default function DisplayNotes(props){
             note.isDeleted? "" :
             <Card className="notes-style" style={{ backgroundColor:note.color}}>
             <div onClick={()=>{handleOnClick(note)}} className="notes-title">{note.title}</div>
-            <div className="notes-body">{note.description} </div>
-            <div className="notes-body"><MenuBar GetNotes={props.GetNotes} notesId={note.id} className="note-menu" /> </div>
-            <CustomDialog GetNotes={props.GetNotes} notes={currentNote} show={show} onHide={()=>{setShow(false)}}/>
+            <div className="notes-body">{note.description}</div>
+            <div className="notes-footer"><MenuBar GetNotes={props.GetNotes} notesId={note.id} className="note-menu" /> </div>            
             </Card>
         );
 
         return(
             <div className="display-notes">
                 {Notes}   
+                <CustomDialog GetNotes={props.GetNotes} notes={currentNote} show={show} onHide={()=>{setShow(false)}}/>
             </div>
         );
     

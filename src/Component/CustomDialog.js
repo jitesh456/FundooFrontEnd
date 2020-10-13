@@ -18,10 +18,10 @@ export default function CustomDialog(props) {
         setDescription();
     }
 
-    useEffect(()=>{
-        setDescription(props.notes.description);
+    useEffect(()=>{        
         setTitle(props.notes.title);
-    },[props.notes.description,props.notes.title]);
+        setDescription(props.notes.description);
+    },[props.notes.title,props.notes.description]);
     const updateNotes=()=>{        
         const data={
             "noteId": props.notes.id,
@@ -39,29 +39,33 @@ export default function CustomDialog(props) {
     return (
       <Modal {...props}  size="md"
       aria-labelledby="contained-modal-title-vcenter"
-      centered >
-        <div className="update-title">
-          <input
-                className="create-note"
-                type="text"
-                value={title}
-                placeholder="Title"  
-                onChange={(e)=>{setTitle(e.target.value)}}          
-                />          
-        </div>
-          <div className="update-title">
-                
-                <input
-                className="update-note-description"
-                type="text"
-                value={description}
-                placeholder="Discription"  
-                onChange={(e)=>{setDescription(e.target.value)}}                   
-                />
-          
-        </div>
-        <div className="update-footer">
-          <div style={{ width:"68%" ,marginLeft:"2%"}}> <Menubar/></div><Button style={{marginRight:"2%"}} variant="light" onClick={()=>{updateNotes();props.onHide()}}>Close</Button>
+      centered  >
+        <div style={{ backgroundColor:props.notes.color,width:"100%",height:"100%",borderRadius: "3px"}}>
+            <div className="update-title" >
+            <input
+                  className="create-note"
+                  type="text"
+                  value={title}
+                  placeholder="Title"  
+                  onChange={(e)=>{setTitle(e.target.value)}}          
+                  />          
+          </div>
+            <div className="update-title">
+                  
+                  <textarea
+                  className="update-note-description"
+                  type="text"
+                  value={description}
+                  placeholder="Discription"  
+                  onChange={(e)=>{setDescription(e.target.value)}} 
+                  multiline                  
+                  />
+            
+          </div>
+          <div className="update-footer">
+            <div style={{ width:"68%" ,marginLeft:"2%"}}> <Menubar GetNotes={props.GetNotes} notesId={props.notes.id}/></div><Button style={{marginRight:"2%",backgroundColor: "transparent",
+        border: "none"}} variant="light" onClick={()=>{updateNotes();props.onHide()}}>Close</Button>
+          </div>
         </div>
       </Modal>
     );
