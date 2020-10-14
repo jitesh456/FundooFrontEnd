@@ -2,12 +2,12 @@ import React from 'react';
 import '../Css/Dashboard.css';
 import Drawar from './Drawar';
 import DrawarOpen from './DrawarOpen';
-import  NoteService from '../Service/NoteService';
-import CreateNote from '../Component/CreateNote';
-import DisplayNotes from '../Component/DisplayNotes';
 import {Navbar,Button,Dropdown} from 'react-bootstrap';
 import {ReactComponent as SearchLogo}  from '../Assets/Search.svg';
 import {ReactComponent as ClearIcon}  from '../Assets/Clear.svg';
+import ProtectedRoute from '../Component/ProtectedRoute';
+import Notes from '../Component/Notes';
+import Trash from '../Component/Trash';
 
 
 export default class DashBoard extends React.Component{
@@ -16,33 +16,20 @@ export default class DashBoard extends React.Component{
         this.state={
             open:false,
             active:false,            
-            drawarWidth:"drawar-width",
-            notes:[]
+            drawarWidth:"drawar-width",            
         }
-        this.wrapperRef=React.createRef();
+        
     }
 
-    getNotes(){
-        NoteService.getNotes().then(response=>{
-            console.log(response.data.data.data);
-            this.setState({notes:response.data.data.data});
-        })
-        .catch(error=>{
-            console.log(error);
-        });
-    }
-
+    
     componentDidMount(){
-       this.getNotes();
-       
+     this.props.history.push("/dashboard/notes")
     }
     handleClick(){        
         !this.state.open?this.setState({drawarWidth:"drawar-width-open-relative"}):this.setState({drawarWidth:"drawar-width"});
     }
 
     handleMouseHover=()=>{
-        
-        console.log(true);
         if(!this.state.active && this.state.open===false)
         {
             this.setState({open:true})
@@ -74,6 +61,7 @@ export default class DashBoard extends React.Component{
                     }} aria-controls="example-collapse-text"
                     aria-expanded={this.state.open} variant="light"><img height="27px" alt="MenuLogo" src={require('../Assets/Menu.png')}/> 
                     </Button></Navbar.Brand>
+                    <navigationBar/>
                     <div style={{width:"50px"}}>
                     <img height="40px" alt="MenuLogo" src={require('../Assets/Keep.png')}/>    
                     </div>
@@ -103,7 +91,7 @@ export default class DashBoard extends React.Component{
                                 <span style={{fontFamily:"inherit",fontSize:"14px",color:"grey"}}>jitesh0dubey@gmail.com</span>
                                 </div>
                                 <div className="sign-out">
-                                <Button onClick={()=>{localStorage.clear();window.location.reload('/')}} variant="light">Sign out</Button>
+                                <Button onClick={()=>{localStorage.clear();this.props.history.push("/");}} variant="light">Sign out</Button>
                                 </div>                             
                             </div>                           
                         </Dropdown.Menu>
@@ -115,11 +103,10 @@ export default class DashBoard extends React.Component{
                 onMouseLeave={()=>{this.handleMouseHover()}}>                
                  {this.displayDrawar()}                                                  
                 </div>
-                    <div className="create-note-container">
-                        <CreateNote GetNotes={()=>{this.getNotes()}} />
-                        <DisplayNotes GetNotes={()=>{this.getNotes()}} notes={this.state.notes}/>                    
-                    </div>                  
-                </div>              
+                    <ProtectedRoute path="/dashboard/notes"   component={Notes}/>
+                    <ProtectedRoute path="/dashboard/trash"   component={Trash}/>         
+                </div>      
+                       
             </>
         );
     }    

@@ -44,6 +44,14 @@ const header={headers:{
         var url=baseurl.concat("/changesColorNotes");
         return this.AxiosService.post(url,Data,true,header);
     }
+    restoreNote=(Data)=>{
+        var url=baseurl.concat("/trashNotes");
+        return this.AxiosService.post(url,Data,true,header);
+    }
+    DeleteForever=(Data)=>{
+        var url=baseurl.concat("/deleteForeverNotes");
+        return this.AxiosService.post(url,Data,true,header);
+    }
 }
 
 export default new NoteService();

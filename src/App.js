@@ -5,22 +5,25 @@ import Login from './Component/Login';
 import ForgotPassword from './Component/ForgotPassword';
 import ResetPassword from './Component/ResetPassword';
 import DashBoard from './Component/DashBoard';
-import {BrowserRouter as Router,Switch,Route}from 'react-router-dom';
+import {BrowserRouter as Router,Route,Switch}from 'react-router-dom';
 import ProtectedRoute from './Component/ProtectedRoute';
-import Trash from './Component/Trash';
+import history from './Component/history'
+
+/*Child routing is on dashboard.js */
 
 function App() {
+
+  
   return (
     <div className="App">           
-      <Router>        
-        <Switch>
+      <Router history={history}>        
+          <Switch>
           <Route path="/" exact component={Login}/>
           <Route path="/createaccount" exact component={CreateAccount}/>
           <Route path="/forgotpassword" exact component={ForgotPassword}/>
           <Route path="/resetpassword/:token"  component={ResetPassword}/>
-          <ProtectedRoute path="/dashboard"  exact component={DashBoard}/>
-          <ProtectedRoute path="/dashboard/trash"  exact component={Trash}/>
-         </Switch>
+          <ProtectedRoute path="/dashboard"   component={DashBoard}/>          
+          </Switch> 
       </Router>
     </div>
   );

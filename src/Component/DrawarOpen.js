@@ -4,12 +4,16 @@ import {ReactComponent as ReminderLogo}  from '../Assets/ReminderLogo.svg';
 import {ReactComponent as EditLabel}  from '../Assets/EditLabel.svg';
 import {ReactComponent as Archive}  from '../Assets/Archive.svg';
 import {ReactComponent as Delete}  from '../Assets/Delete.svg';
+import {useHistory} from 'react-router-dom'
 
 export default function DrawarOpen(props){
 
+   const history=useHistory();
     return(
         <div className="drawar">                                                             
-                     <div className="drawar-icon-contener-open">
+                     <div onClick={()=>{
+                        history.push("/dashboard/notes");
+                     }} className="drawar-icon-contener-open">
                         <NoteLogo className="drawar-icon-open"/>
                         <spam className="icon-lable">Notes</spam>   
                      </div>
@@ -25,7 +29,9 @@ export default function DrawarOpen(props){
                         <Archive className="drawar-icon-open"/>  
                         <spam className="icon-lable">Archive</spam>                                                         
                      </div>
-                     <div className="drawar-icon-contener-open">
+                     <div className="drawar-icon-contener-open" onClick={()=>{
+                        history.push("/dashboard/trash");
+                     }}>
                         <Delete className="drawar-icon-open"/>   
                         <spam className="icon-lable">Trash</spam>                                                        
                      </div>                                                            
