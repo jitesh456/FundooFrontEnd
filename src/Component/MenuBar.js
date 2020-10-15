@@ -8,6 +8,7 @@ import CropOriginalIcon from '@material-ui/icons/CropOriginal';
 import {ReactComponent as ArchiveIcon} from '../Assets/Archive.svg';
 import NotesService from '../Service/NoteService';
 import CustomDropdown from '../Component/CustomDropdown';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 
 export default function Menubar(props){
 
@@ -24,6 +25,30 @@ export default function Menubar(props){
             console.log(error);
         });
         
+    }
+    const archive=(flag)=>{
+        console.log(props.notes);
+        const Data={
+            isArchived: flag,
+            noteIdList: [props.notesId]
+        }
+        NotesService.Archive(Data).then(response=>{
+            console.log(response)
+            props.GetNotes();
+        }).catch(error=>{
+            console.log(error);
+        });
+        
+    }
+
+    const archiveIcon=()=>{
+        if(props.parent.includes("archive")){
+            return(<ArchiveIcon style={{fill:"#5f6368"}}className="icon-design" onClick={()=>{archive(true)}} />)
+        }
+        else
+        {
+            return(<UnarchiveIcon style={{fill:"#5f6368"}}className="icon-design" onClick={()=>{archive(false)}} / >)
+        }
     }
     return(
         <div className={props.className}style={{display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%"}}>
@@ -50,7 +75,7 @@ export default function Menubar(props){
             </Dropdown.Menu>
             </Dropdown>
            <CropOriginalIcon className="icon-design"/>
-            <ArchiveIcon style={{fill:"#5f6368"}}className="icon-design" />
+            {archiveIcon()}
             <CustomDropdown GetNotes={props.GetNotes} notesId={props.notesId}/>
         </div>
     )

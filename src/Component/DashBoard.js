@@ -7,6 +7,7 @@ import {ReactComponent as ClearIcon}  from '../Assets/Clear.svg';
 import ProtectedRoute from '../Component/ProtectedRoute';
 import Notes from '../Component/Notes';
 import Trash from '../Component/Trash';
+import Archive from '../Component/Archive';
 
 
 export default class DashBoard extends React.Component{
@@ -102,7 +103,8 @@ export default class DashBoard extends React.Component{
                  {this.displayDrawar()}                                                  
                 </div>
                     <ProtectedRoute path="/dashboard/notes"   component={Notes}/>
-                    <ProtectedRoute path="/dashboard/trash"   component={Trash}/>         
+                    <ProtectedRoute path="/dashboard/trash"   component={Trash}/>
+                    <ProtectedRoute path="/dashboard/archive"   component={Archive}/>         
                 </div>      
                        
             </>

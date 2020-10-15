@@ -65,7 +65,7 @@ export default function CustomDialog(props) {
             
           </div>
           <div className="update-footer">
-            <div style={{ width:"68%" ,marginLeft:"2%"}}> <Menubar GetNotes={props.GetNotes} notesId={props.notes.id}/></div><Button style={{marginRight:"2%",backgroundColor: "transparent",
+            <div style={{ width:"68%" ,marginLeft:"2%"}}> <Menubar parent={"archive"} GetNotes={props.GetNotes} notesId={props.notes.id}/></div><Button style={{marginRight:"2%",backgroundColor: "transparent",
         border: "none"}} variant="light" onClick={()=>{updateNotes();props.onHide()}}>Close</Button>
           </div>
         </div>

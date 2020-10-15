@@ -35,9 +35,11 @@ export default function DrawarOpen(props){
                         <EditLabel className="drawar-icon-open"/>
                         <spam className={props.className}>Edit Lable</spam>  
                      </div>                           
-                     <div className="drawar-icon-contener-open">
+                     <div className="drawar-icon-contener-open" onClick={()=>{
+                        history.push("/dashboard/archive");
+                     }}>
                         <Archive className="drawar-icon-open"/>  
-                        <spam className={props.className}>Archive</spam>                                                         
+                        <spam className={props.className} >Archive</spam>                                                         
                      </div>
                      <div className="drawar-icon-contener-open" onClick={()=>{
                         history.push("/dashboard/trash");

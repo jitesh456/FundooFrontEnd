@@ -54,7 +54,7 @@ export default function CreateNote(props){
                 />               
                 </div>
                     <div  style={!display?{display:"none"}: {display: "flex",justifyContent: "space-between",paddingTop: "12px",paddingBottom:"12px"}}>
-                       <div style={{width:"70%"}}> <Menubar/></div><div style={{display:"flex"}}><button  id="closeButton" onClick={()=>{setDisplay(false);createNote()}} >Close</button></div>
+                       <div style={{width:"70%"}}> <Menubar parent={"archive"} /></div><div style={{display:"flex"}}><button  id="closeButton" onClick={()=>{setDisplay(false);createNote()}} >Close</button></div>
                     </div>
                     
                 </div>

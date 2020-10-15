@@ -1,8 +1,8 @@
 import AxiosService from './AxiosService';
 
 const baseurl="http://fundoonotes.incubation.bridgelabz.com/api/notes";
-const token=localStorage.getItem('Token');
-console.log(token);
+const token=localStorage.getItem('token');
+
 const header={headers:{
     "Content-Type":'application/json',
     "Authorization":localStorage.getItem('Token')
@@ -50,6 +50,10 @@ const header={headers:{
     }
     DeleteForever=(Data)=>{
         var url=baseurl.concat("/deleteForeverNotes");
+        return this.AxiosService.post(url,Data,true,header);
+    }
+    Archive=(Data)=>{
+        var url=baseurl.concat("/archiveNotes");
         return this.AxiosService.post(url,Data,true,header);
     }
 }
