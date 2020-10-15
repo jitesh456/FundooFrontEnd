@@ -9,15 +9,16 @@ export default class Note extends React.Component{
     constructor(props){
         super(props)
         this.state={            
-            notes:[],
-            isDeleted:false
+            notes:[],            
         }
     }
 
     getNotes(){
+        let note=[]
         NoteService.getNotes().then(response=>{
             console.log(response.data.data.data);
-            this.setState({notes:response.data.data.data});
+            note=response.data.data.data.filter(note=>note.isDeleted===false && note.isArchived===false );
+            this.setState({notes:note});
         })
         .catch(error=>{
             console.log(error);
@@ -33,7 +34,7 @@ export default class Note extends React.Component{
         return(
             <div className="create-note-container">
                 <CreateNote GetNotes={()=>{this.getNotes()}} />
-                <DisplayNotes deleted={this.state.isDeleted}GetNotes={()=>{this.getNotes()}} notes={this.state.notes}/>                    
+                <DisplayNotes parent={"display"} GetNotes={()=>{this.getNotes()}} notes={this.state.notes}/>                    
             </div> 
         );
     }

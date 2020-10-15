@@ -44,37 +44,37 @@ export default function DisplayNotes(props){
         })
     }
 
-        const Notes=props.notes.map(note=>
-            note.isDeleted? "" :
-            <Card className="notes-style" style={{ backgroundColor:note.color}}>
+    const menu=(data)=>{
+        if(props.parent.includes("archive"))
+        {
+            return(<MenuBar parent={""} GetNotes={props.GetNotes} notesId={data} className="note-menu" />);
+        }
+        if(props.parent.includes("trash"))
+        {
+            return(<div className="footer-style"><DeleteForeverIcon onClick={()=>{deleteForever(data);}} /><RestoreFromTrashIcon onClick={()=>{restore(data);}}/></div>);
+        }
+        if(props.parent.includes("display"))
+        {
+          return(<MenuBar parent={"archive"} GetNotes={props.GetNotes} notesId={data} className="note-menu" />)  ; 
+        }
+    }
+    
+    
+    const Notes=props.notes.map(note=>
+            
+        <Card className="notes-style" style={{ backgroundColor:note.color}}>
             <div onClick={()=>{handleOnClick(note)}} className="notes-title">{note.title}</div>
             <div className="notes-body">{note.description}</div>
-            <div className="notes-footer"><MenuBar GetNotes={props.GetNotes} notesId={note.id} className="note-menu" /> </div>            
-            </Card>
-        );
-        const deletedNotes=props.notes.map(note=>
-            note.isDeleted? 
-            <Card className="notes-style" style={{ backgroundColor:note.color}}>
-            <div  className="notes-title">{note.title}</div>
-            <div className="notes-body">{note.description}</div>
-            <div className="notes-footer"><div className="footer-style"><DeleteForeverIcon onClick={()=>{deleteForever(note.id);}} /><RestoreFromTrashIcon onClick={()=>{restore(note.id);}}/></div></div>            
-            </Card> : " "
-        );
-        if(props.deleted){            
-            return(
-                <div className="display-notes">
-                {deletedNotes}                   
-            </div>
-            )
-        }
-        else
-        {
-            return(
-                <div className="display-notes">
-                    {Notes}   
-                    <CustomDialog GetNotes={props.GetNotes} notes={currentNote} show={show} onHide={()=>{setShow(false)}}/>
-                </div>
-            );
-        }  
+            <div className="notes-footer">{menu(note.id)} </div>            
+        </Card>
+    );
+
+    return(
+        <div className="display-notes">
+            {Notes}   
+            <CustomDialog GetNotes={props.GetNotes} notes={currentNote} show={show} onHide={()=>{setShow(false)}}/>
+        </div>
+    );    
+        
 
 } 
