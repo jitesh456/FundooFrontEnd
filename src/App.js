@@ -9,7 +9,7 @@ import {BrowserRouter as Router,Route,Switch}from 'react-router-dom';
 import ProtectedRoute from './Component/ProtectedRoute';
 import history from './Component/history'
 
-/*Child routing is on dashboard.js */
+
 
 function App() {
 
@@ -23,6 +23,7 @@ function App() {
           <Route path="/forgotpassword" exact component={ForgotPassword}/>
           <Route path="/resetpassword/:token"  component={ResetPassword}/>
           <ProtectedRoute path="/dashboard"   component={DashBoard}/>          
+          {/*Child routing is on dashboard.js */}
           </Switch> 
       </Router>
     </div>

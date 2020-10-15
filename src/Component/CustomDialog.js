@@ -22,12 +22,14 @@ export default function CustomDialog(props) {
         setTitle(props.notes.title);
         setDescription(props.notes.description);
     },[props.notes.title,props.notes.description]);
+
     const updateNotes=()=>{        
         const data={
             "noteId": props.notes.id,
             "title": title,
             "description": description
         }
+        
         NoteService.UpdateNotes(data).then(response=>{
             console.log(response);
             clear();

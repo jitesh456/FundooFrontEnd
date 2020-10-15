@@ -1,6 +1,5 @@
 import React from 'react';
 import '../Css/Dashboard.css';
-import Drawar from './Drawar';
 import DrawarOpen from './DrawarOpen';
 import {Navbar,Button,Dropdown} from 'react-bootstrap';
 import {ReactComponent as SearchLogo}  from '../Assets/Search.svg';
@@ -21,7 +20,6 @@ export default class DashBoard extends React.Component{
         
     }
 
-    
     componentDidMount(){
      this.props.history.push("/dashboard/notes")
     }
@@ -44,10 +42,10 @@ export default class DashBoard extends React.Component{
     
     displayDrawar(){
         if(!this.state.open){            
-            return(<Drawar />)
+            return(<DrawarOpen className={"icon-lable-hide"} />)
         }
         if(this.state.open){
-            return(<DrawarOpen />)
+            return(<DrawarOpen className={"icon-lable"} />)
         }
     }
 
